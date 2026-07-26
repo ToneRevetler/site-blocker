@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Sites Blocker",
+  "version": "1.0.0",
+  "description": "Bloqueia sites escolhidos por você.",
+  "permissions": ["storage", "declarativeNetRequest"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["blocked.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
