@@ -1,5 +1,3 @@
-const BLOCKED_PAGE = chrome.runtime.getURL("blocked.html");
-
 async function getBlockedSites() {
   const { blockedSites = [] } = await chrome.storage.local.get("blockedSites");
   return blockedSites;
@@ -11,7 +9,7 @@ function domainToRule(domain, id) {
     priority: 1,
     action: {
       type: "redirect",
-      redirect: { url: BLOCKED_PAGE },
+      redirect: { extensionPath: `/blocked.html?site=${encodeURIComponent(domain)}` },
     },
     condition: {
       urlFilter: `||${domain}`,
