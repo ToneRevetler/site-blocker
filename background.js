@@ -1,6 +1,9 @@
-async function getBlockedSites() {
-  const { blockedSites = [] } = await chrome.storage.local.get("blockedSites");
-  return blockedSites;
+async function getState() {
+  const { blockedSites = [], protectionEnabled = true } = await chrome.storage.local.get([
+    "blockedSites",
+    "protectionEnabled",
+  ]);
+  return { blockedSites, protectionEnabled };
 }
 
 function domainToRule(domain, id) {
@@ -19,12 +22,14 @@ function domainToRule(domain, id) {
 }
 
 async function syncRules() {
-  const sites = await getBlockedSites();
+  const { blockedSites, protectionEnabled } = await getState();
 
   const existingRules = await chrome.declarativeNetRequest.getDynamicRules();
   const removeRuleIds = existingRules.map((rule) => rule.id);
 
-  const addRules = sites.map((domain, index) => domainToRule(domain, index + 1));
+  const addRules = protectionEnabled
+    ? blockedSites.map((domain, index) => domainToRule(domain, index + 1))
+    : [];
 
   await chrome.declarativeNetRequest.updateDynamicRules({
     removeRuleIds,
@@ -36,7 +41,7 @@ chrome.runtime.onInstalled.addListener(syncRules);
 chrome.runtime.onStartup.addListener(syncRules);
 
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === "local" && changes.blockedSites) {
+  if (area === "local" && (changes.blockedSites || changes.protectionEnabled)) {
     syncRules();
   }
 });
