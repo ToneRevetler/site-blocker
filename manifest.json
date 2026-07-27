@@ -3,7 +3,7 @@
   "name": "Sites Blocker",
   "version": "1.0.0",
   "description": "Bloqueia sites escolhidos por você.",
-  "permissions": ["storage", "declarativeNetRequest"],
+  "permissions": ["storage", "declarativeNetRequest", "activeTab"],
   "host_permissions": ["<all_urls>"],
   "background": {
     "service_worker": "background.js"
