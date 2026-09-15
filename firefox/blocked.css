@@ -1,0 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #2a1416 0%, #17181c 55%, #0e0f12 100%);
+  color: #f2f2f2;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card {
+  background: linear-gradient(160deg, #262229, #1b191e);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.icon {
+  font-size: 44px;
+  line-height: 1;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 4px 10px rgba(217, 54, 62, 0.4));
+}
+
+h1 {
+  margin: 0 0 10px;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.target {
+  margin: 0 0 14px;
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(217, 54, 62, 0.15);
+  color: #ff8085;
+  font-weight: 600;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.subtitle {
+  margin: 0;
+  color: #9a9aa0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.list-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 18px;
+  padding: 20px 22px;
+}
+
+.list-card h2 {
+  margin: 0 0 12px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7f7f87;
+  font-weight: 600;
+}
+
+#site-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 220px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#site-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  font-size: 14px;
+  color: #d6d6da;
+  word-break: break-all;
+}
+
+#site-list li.current {
+  background: rgba(217, 54, 62, 0.12);
+  color: #ff9fa2;
+  font-weight: 600;
+}
+
+#site-list li::before {
+  content: "●";
+  font-size: 8px;
+  color: #d9363e;
+  flex-shrink: 0;
+}
+
+.empty {
+  color: #6f6f76;
+  font-size: 13px;
+  text-align: center;
+  padding: 6px 0;
+}
