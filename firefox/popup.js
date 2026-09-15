@@ -29,8 +29,12 @@ function normalizeDomain(raw) {
   return value;
 }
 
-function faviconUrl(domain) {
-  return `https://www.google.com/s2/favicons?domain=${encodeURIComponent(domain)}&sz=64`;
+function domainHue(domain) {
+  let hash = 0;
+  for (const char of domain) {
+    hash = (hash * 31 + char.charCodeAt(0)) % 360;
+  }
+  return hash;
 }
 
 async function getState() {
@@ -62,10 +66,12 @@ function renderSiteRow(domain, protectionEnabled) {
   const row = document.createElement("div");
   row.className = "site-row";
 
-  const favicon = document.createElement("img");
+  const favicon = document.createElement("div");
   favicon.className = "site-favicon";
-  favicon.src = faviconUrl(domain);
-  favicon.alt = "";
+  favicon.textContent = domain[0].toUpperCase();
+  const hue = domainHue(domain);
+  favicon.style.background = `hsl(${hue} 70% 93%)`;
+  favicon.style.color = `hsl(${hue} 50% 38%)`;
 
   const label = document.createElement("span");
   label.className = "site-domain";
